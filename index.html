@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafa Bento - Animation Portfolio</title>
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #252525;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-primary: #e62429;
+            --accent-secondary: #ffd700;
+            --accent-blue: #0066cc;
+            --border-color: #333;
+            --shadow: rgba(230, 36, 41, 0.3);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f5f5f5;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --accent-primary: #e62429;
+            --accent-secondary: #ffd700;
+            --accent-blue: #0066cc;
+            --border-color: #e0e0e0;
+            --shadow: rgba(230, 36, 41, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Comic Book Effect */
+        .comic-border {
+            position: relative;
+            padding: 3px;
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--accent-blue));
+            background-size: 300% 300%;
+            animation: gradientShift 6s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .comic-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-card);
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-secondary);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--accent-primary);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: var(--accent-primary);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-left: 1rem;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--shadow);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, var(--accent-primary) 2px, var(--accent-primary) 3px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, var(--accent-primary) 2px, var(--accent-primary) 3px);
+            opacity: 0.03;
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 3px 3px 0 var(--accent-primary), 6px 6px 0 var(--accent-secondary);
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .hero .location {
+            font-size: 1.2rem;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Section */
+        section {
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow);
+            border-color: var(--accent-primary);
+        }
+
+        .skill-card h3 {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .skill-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* Carousel */
+        .carousel-section {
+            margin-bottom: 4rem;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            background: var(--bg-card);
+            padding: 2rem;
+            border: 3px solid var(--border-color);
+        }
+
+        .carousel-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 2rem;
+            color: white;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 10;
+            border-radius: 5px;
+        }
+
+        .carousel-btn:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn.prev {
+            left: 1rem;
+        }
+
+        .carousel-btn.next {
+            right: 1rem;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-color);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .dot.active {
+            background: var(--accent-primary);
+            transform: scale(1.3);
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .contact-card h3 {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-card a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            text-align: center;
+            border-top: 3px solid var(--accent-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+                text-shadow: 2px 2px 0 var(--accent-primary), 4px 4px 0 var(--accent-secondary);
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .carousel {
+                height: 300px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                justify-content: center;
+            }
+
+            nav ul {
+                justify-content: center;
+                margin-top: 1rem;
+            }
+
+            .theme-toggle {
+                margin: 1rem 0 0 0;
+            }
+        }
+
+        /* Animation for page load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <header>
+        <nav>
+            <div class="logo">Rafa Bento</div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Rafa Bento</h1>
+            <p class="tagline">Animation Artist & Visual Storyteller</p>
+            <p class="location">📍 Austin, TX</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Hello! I'm Rafa Bento, an aspiring animation artist passionate about bringing stories to life through visual art and motion. My journey in animation began with a fascination for how single frames can create compelling narratives and evoke powerful emotions.
+                    </p>
+                    <p>
+                        Inspired by the dynamic storytelling of comic books and graphic novels, I blend traditional animation techniques with modern digital tools to create unique visual experiences. My work explores the intersection of character development, movement, and narrative flow.
+                    </p>
+                    <p>
+                        I'm currently seeking opportunities to expand my skills and knowledge in animation at leading colleges in the United States, where I can collaborate with fellow artists and push the boundaries of visual storytelling.
+                    </p>
+                </div>
+                <div class="about-text">
+                    <p>
+                        My approach to animation is rooted in understanding character psychology and environmental storytelling. I believe that every frame should serve the narrative while maintaining aesthetic appeal and technical excellence.
+                    </p>
+                    <p>
+                        When I'm not animating, you can find me sketching in coffee shops, studying frame-by-frame breakdowns of my favorite animated films, or exploring new digital art techniques and software.
+                    </p>
+                    <p>
+                        I'm excited to bring my unique perspective, dedication, and creativity to a college program that values innovation and artistic growth.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2 class="section-title">Skills & Software</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Animation Techniques</h3>
+                    <ul>
+                        <li>2D Character Animation</li>
+                        <li>Motion Graphics</li>
+                        <li>Storyboarding</li>
+                        <li>Frame-by-Frame Animation</li>
+                        <li>Digital Illustration</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Software Proficiency</h3>
+                    <ul>
+                        <li>Adobe After Effects</li>
+                        <li>Adobe Animate</li>
+                        <li>Toon Boom Harmony</li>
+                        <li>Procreate</li>
+                        <li>Adobe Photoshop</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Creative Skills</h3>
+                    <ul>
+                        <li>Visual Storytelling</li>
+                        <li>Character Design</li>
+                        <li>Color Theory</li>
+                        <li>Composition</li>
+                        <li>Concept Development</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio">
+            <h2 class="section-title">Portfolio</h2>
+            
+            <!-- Carousel 1 -->
+            <div class="carousel-section">
+                <div class="carousel-container comic-border">
+                    <h3 class="carousel-title">Category TBD #1</h3>
+                    <div class="carousel" id="carousel1">
+                        <div class="carousel-track" id="track1">
+                            <div class="carousel-slide">
+                                <img src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=1200&h=800&fit=crop" alt="Animation Sample 1">
+                                <div class="carousel-caption">
+                                    <h4>Project Title 1</h4>
+                                    <p>Description of this animation project goes here.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&h=800&fit=crop" alt="Animation Sample 2">
+                                <div class="carousel-caption">
+                                    <h4>Project Title 2</h4>
+                                    <p>Description of this animation project goes here.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://images.unsplash.com/photo-1609743522471-83c84ce23e32?w=1200&h=800&fit=crop" alt="Animation Sample 3">
+                                <div class="carousel-caption">
+                                    <h4>Project Title 3</h4>
+                                    <p>Description of this animation project goes here.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=1200&h=800&fit=crop" alt="Animation Sample 4">
+                                <div class="carousel-caption">
+                                    <h4>Project Title 4</h4>
+                                    <p>Description of this animation project goes here.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://images.unsplash.com/photo-1579762593131-d94087035b35?w=1200&h=800&fit=crop" alt="Animation Sample 5">
+                                <div class="carousel-caption">
+                                    <h4>Project Title 5</h4>
+                                    <p>Description of this animation project goes here.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-btn prev" onclick="moveCarousel('carousel1', -1)">❮</button>
+                        <button class="carousel-btn next" onclick="moveCarousel('carousel1', 1)">❯</button>
+                    </div>
+                    <div class="carousel-dots" id="dots1"></div>
+                </div>
+            </div>
+
+            <!-- Carousel 2 -->
+            <div class="carousel-section">
+                <div class="carousel-container comic-border">
+                    <h3 class="carousel-title">Category TBD #2</h3>
+                    <div class="carousel" id="carousel2">
+                        <div class="carousel-track" id="track2">
+                            <div class="carousel-slide">
+                                <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=1200&h=800&fit=crop" alt="Animation Sample 6">
+                                <div class="carousel-caption">
+                                    <h4>Project Title 6</h4>
+                                    <p>Description of this animation project goes here.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=1200&h=800&fit=crop" alt="Animation Sample 7">
+                                <div class="carousel-caption">
+                                    <h4>Project Title 7</h4>
+                                    <p>Description of this animation project goes here.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://images.unsplash.com/photo-1635322966219-b75ed372eb01?w=1200&h=800&fit=crop" alt="Animation Sample 8">
+                                <div class="carousel-caption">
+                                    <h4>Project Title 8</h4>
+                                    <p>Description of this animation project goes here.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=1200&h=800&fit=crop" alt="Animation Sample 9">
+                                <div class="carousel-caption">
+                                    <h4>Project Title 9</h4>
+                                    <p>Description of this animation project goes here.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=1200&h=800&fit=crop" alt="Animation Sample 10">
+                                <div class="carousel-caption">
+                                    <h4>Project Title 10</h4>
+                                    <p>Description of this animation project goes here.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-btn prev" onclick="moveCarousel('carousel2', -1)">❮</button>
+                        <button class="carousel-btn next" onclick="moveCarousel('carousel2', 1)">❯</button>
+                    </div>
+                    <div class="carousel-dots" id="dots2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <h3>📧 Email</h3>
+                    <a href="mailto:Rafabento27@gmail.com">Rafabento27@gmail.com</a>
+                </div>
+                <div class="contact-card">
+                    <h3>📱 Instagram</h3>
+                    <p>TBD</p>
+                </div>
+                <div class="contact-card">
+                    <h3>🎨 ArtStation</h3>
+                    <p>TBD</p>
+                </div>
+                <div class="contact-card">
+                    <h3>💼 LinkedIn</h3>
+                    <p>TBD</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Rafa Bento. All rights reserved. | Animation Portfolio</p>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            
+            // Initialize carousels
+            initCarousel('carousel1');
+            initCarousel('carousel2');
+        });
+
+        // Carousel functionality
+        const carouselStates = {};
+
+        function initCarousel(carouselId) {
+            carouselStates[carouselId] = { currentIndex: 0 };
+            const carousel = document.getElementById(carouselId);
+            const track = carousel.querySelector('.carousel-track');
+            const slides = track.querySelectorAll('.carousel-slide');
+            const dotsContainer = document.getElementById('dots' + carouselId.slice(-1));
+            
+            // Create dots
+            slides.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(carouselId, index));
+                dotsContainer.appendChild(dot);
+            });
+
+            // Auto-play
+            setInterval(() => {
+                moveCarousel(carouselId, 1);
+            }, 5000);
+        }
+
+        function moveCarousel(carouselId, direction) {
+            const carousel = document.getElementById(carouselId);
+            const track = carousel.querySelector('.carousel-track');
+            const slides = track.querySelectorAll('.carousel-slide');
+            const state = carouselStates[carouselId];
+            
+            state.currentIndex += direction;
+            
+            if (state.currentIndex >= slides.length) {
+                state.currentIndex = 0;
+            } else if (state.currentIndex < 0) {
+                state.currentIndex = slides.length - 1;
+            }
+            
+            updateCarousel(carouselId);
+        }
+
+        function goToSlide(carouselId, index) {
+            carouselStates[carouselId].currentIndex = index;
+            updateCarousel(carouselId);
+        }
+
+        function updateCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const track = carousel.querySelector('.carousel-track');
+            const state = carouselStates[carouselId];
+            const dotsContainer = document.getElementById('dots' + carouselId.slice(-1));
+            const dots = dotsContainer.querySelectorAll('.dot');
+            
+            track.style.transform = `translateX(-${state.currentIndex * 100}%)`;
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === state.currentIndex);
+            });
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
