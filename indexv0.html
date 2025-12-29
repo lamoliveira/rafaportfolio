@@ -92,14 +92,14 @@
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo svg {
-            height: 60px;
-            width: auto;
-            color: var(--text-primary);
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         nav ul {
@@ -178,10 +178,6 @@
             margin: 0 auto;
             position: relative;
             z-index: 1;
-        }
-
-        .hero-content svg {
-            color: var(--text-primary);
         }
 
         .hero h1 {
@@ -514,25 +510,7 @@
 <body data-theme="dark">
     <header>
         <nav>
-            <div class="logo">
-                <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg" style="height: 60px; width: auto;">
-                    <!-- Play button icon -->
-                    <g transform="translate(35, 40)">
-                        <circle cx="0" cy="0" r="20" fill="none" stroke="#ff6b35" stroke-width="2"/>
-                        <polygon points="-6,-8 -6,8 8,0" fill="#ff6b35"/>
-                    </g>
-                    
-                    <!-- Main text "RAFA" -->
-                    <text x="70" y="42" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="currentColor" letter-spacing="1">
-                        RAFA
-                    </text>
-                    
-                    <!-- Main text "BENTO" -->
-                    <text x="70" y="63" font-family="Arial, sans-serif" font-size="18" font-weight="300" fill="#ff6b35" letter-spacing="3">
-                        BENTO
-                    </text>
-                </svg>
-            </div>
+            <div class="logo">Rafa Bento</div>
             <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -545,25 +523,7 @@
 
     <section class="hero">
         <div class="hero-content">
-            <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
-                <svg viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg" style="height: 140px; width: auto;">
-                    <!-- Play button icon -->
-                    <g transform="translate(70, 80)">
-                        <circle cx="0" cy="0" r="40" fill="none" stroke="#ff6b35" stroke-width="4"/>
-                        <polygon points="-12,-16 -12,16 16,0" fill="#ff6b35"/>
-                    </g>
-                    
-                    <!-- Main text "RAFA" -->
-                    <text x="140" y="90" font-family="Arial, sans-serif" font-size="70" font-weight="bold" fill="currentColor" letter-spacing="3">
-                        RAFA
-                    </text>
-                    
-                    <!-- Main text "BENTO" -->
-                    <text x="140" y="130" font-family="Arial, sans-serif" font-size="38" font-weight="300" fill="#ff6b35" letter-spacing="6">
-                        BENTO
-                    </text>
-                </svg>
-            </div>
+            <h1>Rafa Bento</h1>
             <p class="tagline">Animation Artist & Visual Storyteller</p>
             <p class="location">📍 Austin, TX</p>
         </div>
@@ -745,7 +705,7 @@
             <div class="contact-info">
                 <div class="contact-card">
                     <h3>📧 Email</h3>
-                    <a href="/cdn-cgi/l/email-protection#96c4f7f0f7f4f3f8e2f9a4a1d6f1fbf7fffab8f5f9fb"><span class="__cf_email__" data-cfemail="0a586b6c6b686f647e65383d4a6d676b636624696567">[email&#160;protected]</span></a>
+                    <a href="mailto:Rafabento27@gmail.com">Rafabento27@gmail.com</a>
                 </div>
                 <div class="contact-card">
                     <h3>📱 Instagram</h3>
@@ -767,7 +727,7 @@
         <p>&copy; 2024 Rafa Bento. All rights reserved. | Animation Portfolio</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Theme Toggle
         function toggleTheme() {
             const body = document.body;
@@ -851,17 +811,9 @@
         // Smooth scrolling for navigation
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href.startsWith('#')) {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
     </script>
